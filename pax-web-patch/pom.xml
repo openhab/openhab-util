@@ -4,6 +4,45 @@
 	<groupId>org.openhab.util</groupId>
 	<artifactId>pax-web-patch</artifactId>
 	<version>1.0.0</version>
+
+    <name>openHAB Util - Pax-Web Patch</name>
+    <description>This is a plugin that patches pax-web for use in openHAB</description>
+    <url>https://github.com/openhab/openhab-util</url>
+
+    <licenses>
+        <license>
+            <name>Eclipse Public License</name>
+            <url>http://www.eclipse.org/legal/epl-v10.html</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:${scm.gitBaseUrl}/openhab-distro.git</connection>
+        <developerConnection>scm:git:${scm.gitBaseUrl}/openhab-util.git</developerConnection>
+        <url>https://github.com/openhab/openhab-util</url>
+        <tag>1.0.0</tag>
+    </scm>
+
+	<developers>
+		<developer>
+			<name>openHAB Community</name>
+			<email>info@openhab.org</email>
+		</developer>
+	</developers>
+
+    <issueManagement>
+        <url>https://github.com/openhab/openhab-util/issues</url>
+        <system>Github</system>
+    </issueManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>maven</id>
+			<name>maven-central</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.ow2.asm</groupId>
@@ -11,6 +50,7 @@
 			<version>5.0.2</version>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -20,13 +60,44 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<executions>
+				<execution>
+					<id>sign-artifacts</id>
+					<phase>verify</phase>
+					<goals>
+					<goal>sign</goal>
+					</goals>
+				</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
-	<distributionManagement>
-		<repository>
-			<id>ossrh</id>
-			<url>https://api.bintray.com/maven/openhab/mvn/openhab-distro-deps/;publish=1</url>
-		</repository>
-	</distributionManagement>
 </project>
